@@ -5,16 +5,30 @@ const userSchema = new mongoose.Schema(
     firstName: {
       type: String,
     },
+
     lastName: {
       type: String,
     },
+
     birthYear: {
       type: Number,
     },
+
     email: {
       type: String,
     },
+
     password: {
+      type: String,
+    },
+
+    role: {
+      type: String,
+      enum: ['user', 'admin', 'superAdmin'],
+      default: 'user',
+    },
+
+    token: {
       type: String,
     },
   },
