@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const customerRoutes = require('./customerRouter');
+const userRoutes = require('./userRoutes');
+const superAdminRoutes = require('./superAdminRoutes');
 
-router.use('/', customerRoutes);
+router.use('/superAdmin', superAdminRoutes);
+router.use('/user', userRoutes);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const User = require('../model/userSchema');
 
-exports.registerCustomer = async (req, res) => {
+exports.registerUser = async (req, res) => {
   try {
     const { firstName, lastName, birthYear, email, password } = req.body;
 
@@ -32,13 +32,20 @@ exports.registerCustomer = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: 'Fail',
-      message: err,
+      message: err.message,
     });
   }
 };
 
 exports.updateProfile = async (req, res) => {
   try {
+    const { id } = req.params;
+
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+      return res.status(400).send('Not found!!');
+    }
+
     const updateProfile = await User.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
@@ -54,15 +61,14 @@ exports.updateProfile = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: 'Fail',
-      message: err,
+      message: err.message,
     });
   }
 };
 
-exports.deleteProfile = async (req, res) => {
+exports.deleteUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
 
     const user = await User.findOne({ _id: id });
     if (!user) return res.status(404).send('Not Found!!');
@@ -74,7 +80,7 @@ exports.deleteProfile = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: 'Fail',
-      message: err,
+      message: err.message,
     });
   }
 };

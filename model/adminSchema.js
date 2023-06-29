@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
-    firstName: {
+    adminName: {
       type: String,
     },
 
-    lastName: {
+    birthday: {
       type: String,
-    },
-
-    birthYear: {
-      type: Number,
     },
 
     email: {
@@ -24,12 +20,13 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      default: 'user',
+      enum: ['user', 'admin', 'superAdmin'],
+      default: 'admin',
     },
 
     ban: {
-      type: String,
-      default: 'false',
+      type: Boolean,
+      default: false,
     },
 
     token: {
@@ -39,6 +36,5 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+const Admin = mongoose.model('Admin', adminSchema);
+module.exports = Admin;
