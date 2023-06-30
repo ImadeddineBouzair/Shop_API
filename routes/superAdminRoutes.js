@@ -1,16 +1,21 @@
 const router = require('express').Router();
 
 const {
-  getAllUsers,
   getAllAdmins,
   createAdmin,
-  updateAdminProfile,
+  updateAdmin,
+  deleteAdmin,
 } = require('../controller/superAdmin');
-const { deleteUserProfile } = require('../controller/user');
+const { adminLogIn } = require('../controller/login');
+const { adminCheckToken } = require('../middlewares/checkToken');
+const { getAllUsers, deleteUserProfile } = require('../controller/user');
 
-router.route('/admins').get(getAllAdmins);
-router.route('/users').get(getAllUsers);
-router.route('/createAdmin').post(createAdmin);
-router.route('/:id').patch(updateAdminProfile).delete(deleteUserProfile);
+router.route('/').post(adminLogIn);
+router.route('/admins').get(adminCheckToken, getAllAdmins);
+router.route('/users').get(adminCheckToken, getAllUsers);
+router.route('/createAdmin').post(adminCheckToken, createAdmin);
+router.route('/updateAdmin/:id').patch(adminCheckToken, updateAdmin);
+router.route('/deleteAdmin/:id').delete(adminCheckToken, deleteAdmin);
+router.route('/deleteUser/:id').delete(adminCheckToken, deleteUserProfile);
 
 module.exports = router;

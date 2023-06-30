@@ -1,25 +1,26 @@
+const bcrypt = require('bcryptjs');
 const Admin = require('../model/adminSchema');
-const User = require('../model/userSchema');
+// const User = require('../model/userSchema');
 
 // ============== User Controllers
-exports.getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find();
+// exports.getAllUsers = async (req, res) => {
+//   try {
+//     const users = await User.find();
 
-    if (!users) return res.status(400).send('No data!!');
+//     if (!users) return res.status(400).send('No data!!');
 
-    res.status(200).json({
-      status: 'Seccuss',
-      results: users.length,
-      data: users,
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: 'Fail',
-      message: err.message,
-    });
-  }
-};
+//     res.status(200).json({
+//       status: 'Seccuss',
+//       results: users.length,
+//       data: users,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       status: 'Fail',
+//       message: err.message,
+//     });
+//   }
+// };
 
 // exports.banningUser = async (req, res) => {
 //   try {
@@ -49,7 +50,6 @@ exports.getAllUsers = async (req, res) => {
 //   }
 // };
 
-// ============== Admin Controllers
 exports.getAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
@@ -67,23 +67,27 @@ exports.getAllAdmins = async (req, res) => {
 
 exports.createAdmin = async (req, res) => {
   try {
-    const { adminName, birthday, email, password } = req.body;
-    if (!(adminName, birthday, email, password)) {
+    const { adminName, phoneNumber, birthday, email, password } = req.body;
+
+    if (!(adminName, phoneNumber, birthday, email, password)) {
       res.status(400).send('All the fields ar required!!');
     }
 
     const oldAdmin = await Admin.findOne({ email });
     if (oldAdmin) return res.status(400).send('Admin already exist!!');
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const admin = new Admin({
       adminName,
+      phoneNumber,
       birthday,
       email,
-      password, // will hash it later ==========
+      password: hashedPassword,
     });
 
     const newAdmin = await admin.save();
-    res.status(200).json({
+    res.status(201).json({
       status: 'Created with seccuss',
       data: newAdmin,
     });
@@ -92,7 +96,7 @@ exports.createAdmin = async (req, res) => {
   }
 };
 
-exports.updateAdminProfile = async (req, res) => {
+exports.updateAdmin = async (req, res) => {
   try {
     // const admin = await Admin.findById(req.params.id);
     // if (!admin) return res.status(400).send('Not found!');
@@ -111,5 +115,20 @@ exports.updateAdminProfile = async (req, res) => {
     });
   } catch (err) {
     res.status(500).send(err.message);
+  }
+};
+
+exports.deleteAdmin = async (req, res) => {
+  try {
+    const admin = await Admin.findOne({ _id: req.params.id });
+    if (!admin) return res.status(400).send('Not found!!');
+
+    await Admin.findOneAndDelete({ _id: req.params.id });
+    res.status(200).send('Delete with success!!');
+  } catch (err) {
+    res.status(500).json({
+      status: 'Fail',
+      message: err.message,
+    });
   }
 };

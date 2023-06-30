@@ -6,6 +6,10 @@ const adminSchema = new mongoose.Schema(
       type: String,
     },
 
+    phoneNumber: {
+      type: Number,
+    },
+
     birthday: {
       type: String,
     },

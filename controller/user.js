@@ -1,10 +1,31 @@
+const bcrypt = require('bcryptjs');
 const User = require('../model/userSchema');
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+
+    if (!users) return res.status(400).send('No data!!');
+
+    res.status(200).json({
+      status: 'Seccuss',
+      results: users.length,
+      data: users,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'Fail',
+      message: err.message,
+    });
+  }
+};
 
 exports.registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, birthYear, email, password } = req.body;
+    const { firstName, lastName, phoneNumber, birthYear, email, password } =
+      req.body;
 
-    if (!(firstName, lastName, birthYear, email, password)) {
+    if (!(firstName, lastName, phoneNumber, birthYear, email, password)) {
       return res.status(400).send('All the fields are required!!');
     }
 
@@ -13,12 +34,15 @@ exports.registerUser = async (req, res) => {
       return res.status(400).send('User already exist!!');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = new User({
       firstName,
       lastName,
+      phoneNumber,
       birthYear,
       email,
-      password, //Will hash it later!!! ======================
+      password: hashedPassword,
     });
 
     const newUser = await user.save();

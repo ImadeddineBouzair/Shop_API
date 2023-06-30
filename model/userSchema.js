@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
 
+    phoneNumber: {
+      type: Number,
+    },
+
     birthYear: {
       type: Number,
     },
