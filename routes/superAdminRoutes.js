@@ -5,17 +5,17 @@ const {
   createAdmin,
   updateAdmin,
   deleteAdmin,
-} = require('../controller/superAdmin');
-const { adminLogIn } = require('../controller/login');
-const { adminCheckToken } = require('../middlewares/checkToken');
+} = require('../controller/admin');
 const { getAllUsers, deleteUserProfile } = require('../controller/user');
+const { createProduct } = require('../controller/product');
 
-router.route('/').post(adminLogIn);
-router.route('/admins').get(adminCheckToken, getAllAdmins);
-router.route('/users').get(adminCheckToken, getAllUsers);
-router.route('/createAdmin').post(adminCheckToken, createAdmin);
-router.route('/updateAdmin/:id').patch(adminCheckToken, updateAdmin);
-router.route('/deleteAdmin/:id').delete(adminCheckToken, deleteAdmin);
-router.route('/deleteUser/:id').delete(adminCheckToken, deleteUserProfile);
+// router.route('/login').post(adminLogIn);
+router.route('/admins').get(getAllAdmins);
+router.route('/users').get(getAllUsers);
+router.route('/createAdmin').post(createAdmin);
+router.route('/createProduct').post(createProduct);
+router.route('/updateAdmin/:id').patch(updateAdmin);
+router.route('/deleteAdmin/:id').delete(deleteAdmin);
+router.route('/deleteUser/:id').delete(deleteUserProfile);
 
 module.exports = router;
