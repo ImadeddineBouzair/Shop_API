@@ -70,6 +70,9 @@ exports.updateProfile = async (req, res) => {
       return res.status(400).send('Not found!!');
     }
 
+    if (Object.keys(req.body).length === 0)
+      return res.status(400).send('No data to update');
+
     const updateProfile = await User.findOneAndUpdate(
       { _id: req.params.id },
       req.body,

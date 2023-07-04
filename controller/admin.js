@@ -98,8 +98,11 @@ exports.createAdmin = async (req, res) => {
 
 exports.updateAdmin = async (req, res) => {
   try {
-    // const admin = await Admin.findById(req.params.id);
-    // if (!admin) return res.status(400).send('Not found!');
+    const admin = await Admin.findOne({ _id: req.params.id });
+    if (!admin) return res.status(400).send('Not found!');
+
+    if (Object.keys(req.body).length === 0)
+      return res.status(400).send('No data to update');
 
     const adminupdate = await Admin.findOneAndUpdate(
       { _id: req.params.id },

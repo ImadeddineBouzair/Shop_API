@@ -49,11 +49,13 @@ exports.getAllProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
-    const product = await Product.find({ _id: req.params.id });
+    const product = await Product.findOne({ _id: req.params.id });
     if (!product) return res.status(400).send('Not found');
 
     const data = req.body;
-    if (!data) return res.status(400).send('No data to update');
+
+    if (Object.keys(data).length === 0)
+      return res.status(400).send('No data to update');
 
     const updateProduct = await Product.findOneAndUpdate(
       { _id: req.params.id },
@@ -69,4 +71,16 @@ exports.updateProduct = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
-// did not test the functions yet -------------------------
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.find({ _id: req.params.id });
+    if (!product) return res.status(400).send('Not found');
+
+    await Product.findOneAndDelete({ _id: req.params.id });
+
+    res.status(200).send('Deleted with seccuss');
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
