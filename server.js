@@ -1,13 +1,12 @@
 const express = require('express');
-const app = express();
-
 const appRoutes = require('./routes/index');
 
 require('dotenv').config();
 require('./config/database').connect();
 
-app.use(express.json());
+const app = express();
 
+app.use(express.json());
 app.use('/api/v1/shop', appRoutes);
 
 app.listen(3000, () =>

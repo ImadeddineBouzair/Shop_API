@@ -111,3 +111,19 @@ exports.deleteUserProfile = async (req, res) => {
     });
   }
 };
+
+exports.sortingUsers = async (req, res) => {
+  try {
+    const query = req.query;
+    console.log(query);
+    const users = await User.find(query);
+
+    res.status(200).json({
+      status: 'Seccuss',
+      results: users.length,
+      data: users,
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
