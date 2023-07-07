@@ -4,8 +4,18 @@ const User = require('../model/userSchema');
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-
     if (!users) return res.status(400).send('No data!!');
+
+    const sort = req.query;
+    if (sort) {
+      const users = await User.find().sort(sort);
+
+      return res.status(200).json({
+        status: 'Seccuss',
+        results: users.length,
+        data: users,
+      });
+    }
 
     res.status(200).json({
       status: 'Seccuss',
@@ -109,21 +119,5 @@ exports.deleteUserProfile = async (req, res) => {
       status: 'Fail',
       message: err.message,
     });
-  }
-};
-
-exports.sortingUsers = async (req, res) => {
-  try {
-    const query = req.query;
-    console.log(query);
-    const users = await User.find(query);
-
-    res.status(200).json({
-      status: 'Seccuss',
-      results: users.length,
-      data: users,
-    });
-  } catch (err) {
-    res.status(500).send(err.message);
   }
 };
