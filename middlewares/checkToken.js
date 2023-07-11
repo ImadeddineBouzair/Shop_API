@@ -1,6 +1,27 @@
 const jwt = require('jsonwebtoken');
+
+const SuperAdmin = require('../model/superAdminSchema');
 const Admin = require('../model/adminSchema');
 const User = require('../model/userSchema');
+
+exports.superAdminCheckToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token) return res.status(403).send('Not allowed');
+
+    const superAdmin = jwt.decode(token, process.env.TOEKN_KEY);
+    if (!superAdmin) return res.status(403).send('Invalid token');
+
+    const existSuperAdmin = await SuperAdmin.findOne({
+      email: superAdmin.superAdmin_email,
+    });
+    if (!existSuperAdmin) return res.status(403).send('Not allowed');
+
+    return next();
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 
 exports.adminCheckToken = async (req, res, next) => {
   try {

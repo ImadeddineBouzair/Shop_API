@@ -13,9 +13,9 @@ const {
   deleteAllUserOrders,
 } = require('../controller/order');
 
+router.route('/login').post(userLogIn);
 router.route('/orders').get(Orders);
 router.route('/register').post(registerUser);
-router.route('/login').post(userLogIn);
 router.route('/createOrder').post(createOrder);
 router.route('/updateProfile/:id').patch(userCheckToken, updateProfile);
 router.route('/deleteProfile/:id').delete(userCheckToken, deleteUserProfile);

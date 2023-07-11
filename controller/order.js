@@ -18,7 +18,7 @@ exports.createOrder = async (req, res) => {
   try {
     const { user_id, product_id } = req.body;
 
-    if (!(user_id, product_id))
+    if (!(user_id && product_id))
       return res.status('Require: user_id and Product_id');
 
     const order = new Order({

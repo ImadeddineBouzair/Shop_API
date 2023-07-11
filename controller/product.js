@@ -5,7 +5,9 @@ exports.createProduct = async (req, res) => {
     const { productName, price, quantity, image, category, description } =
       req.body;
 
-    if (!(productName, price, quantity, image, category, description)) {
+    if (
+      !(productName && price && quantity && image && category && description)
+    ) {
       return res.status(400).send('All the fields are required');
     }
 

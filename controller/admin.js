@@ -2,26 +2,6 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../model/adminSchema');
 // const User = require('../model/userSchema');
 
-// ============== User Controllers
-// exports.getAllUsers = async (req, res) => {
-//   try {
-//     const users = await User.find();
-
-//     if (!users) return res.status(400).send('No data!!');
-
-//     res.status(200).json({
-//       status: 'Seccuss',
-//       results: users.length,
-//       data: users,
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       status: 'Fail',
-//       message: err.message,
-//     });
-//   }
-// };
-
 // exports.banningUser = async (req, res) => {
 //   try {
 //     const { id } = req.params;
@@ -55,6 +35,17 @@ exports.getAllAdmins = async (req, res) => {
     const admins = await Admin.find();
     if (!admins) return res.status(400).send('No data found!!');
 
+    const sort = req.query;
+    if (sort) {
+      const admins = await Admin.find().sort(sort);
+
+      return res.status(200).json({
+        status: 'Seccuss',
+        results: admins.length,
+        data: admins,
+      });
+    }
+
     res.status(200).json({
       status: 'seccuss',
       results: admins.length,
@@ -69,7 +60,7 @@ exports.createAdmin = async (req, res) => {
   try {
     const { adminName, phoneNumber, birthday, email, password } = req.body;
 
-    if (!(adminName, phoneNumber, birthday, email, password)) {
+    if (!(adminName && phoneNumber && birthday && email && password)) {
       res.status(400).send('All the fields ar required!!');
     }
 
