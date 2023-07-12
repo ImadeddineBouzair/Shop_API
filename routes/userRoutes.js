@@ -15,7 +15,7 @@ const {
 
 /**
  * @swagger
- * /user/login:
+ * https://info-shop.onrender.com/api/v1/shop/user/login:
  *   post:
  *     summary: user Login.
  *     description: user route for authontication, pass in email and password.
@@ -23,7 +23,7 @@ const {
 router.route('/login').post(userLogIn);
 /**
  * @swagger
- * /user/orders:
+ * https://info-shop.onrender.com/api/v1/shop/user/orders:
  *   get:
  *     summary: getting a list of orders.
  *     description: This route for getting all the products that the user order it.
@@ -31,7 +31,7 @@ router.route('/login').post(userLogIn);
 router.route('/orders').get(userCheckToken, Orders);
 /**
  * @swagger
- * /user/register:
+ * https://info-shop.onrender.com/api/v1/shop/user/register:
  *   post:
  *     summary: user register.
  *     description: This route for user registration, It will returnes a user data [firstName, lasteName, phoneNumber, birthYear, email, password, role:user, ban:flast or true].
@@ -39,7 +39,7 @@ router.route('/orders').get(userCheckToken, Orders);
 router.route('/register').post(registerUser);
 /**
  * @swagger
- * /user/createOrder:
+ * https://info-shop.onrender.com/api/v1/shop/user/createOrder:
  *   post:
  *     summary: Add order.
  *     description: This route for adding the user orders.
@@ -47,7 +47,7 @@ router.route('/register').post(registerUser);
 router.route('/createOrder').post(userCheckToken, createOrder);
 /**
  * @swagger
- * /user/upsateProfile/:id:
+ * https://info-shop.onrender.com/api/v1/shop/user/upsateProfile/:id:
  *   patch:
  *     summary: Update Profile.
  *     description: This route for updating the user data, You need pass in the route the user ID.
@@ -55,7 +55,7 @@ router.route('/createOrder').post(userCheckToken, createOrder);
 router.route('/updateProfile/:id').patch(userCheckToken, updateProfile);
 /**
  * @swagger
- * /user/deleteProfile/:id:
+ * https://info-shop.onrender.com/api/v1/shop/user/deleteProfile/:id:
  *   delete:
  *     summary: delete Profile.
  *     description: This route for deleting the user profile, You need pass in the route the user ID.
@@ -63,7 +63,7 @@ router.route('/updateProfile/:id').patch(userCheckToken, updateProfile);
 router.route('/deleteProfile/:id').delete(userCheckToken, deleteUserProfile);
 /**
  * @swagger
- * /user/deleteOrder/:id:
+ * https://info-shop.onrender.com/api/v1/shop/user/deleteOrder/:id:
  *   delete:
  *     summary: delete order.
  *     description: This route for deleting the user order, You need pass in the route the order ID.
@@ -71,7 +71,7 @@ router.route('/deleteProfile/:id').delete(userCheckToken, deleteUserProfile);
 router.route('/deleteOrder/:id').delete(userCheckToken, deleteOrder);
 /**
  * @swagger
- * /user/deleteAllUserOrders/:user_id:
+ * https://info-shop.onrender.com/api/v1/shop/user/deleteAllUserOrders/:user_id:
  *   delete:
  *     summary: Delete all the user orders.
  *     description: This route for deleting the user orders, You need pass in the route the user ID.

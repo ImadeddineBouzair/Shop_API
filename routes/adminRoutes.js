@@ -12,7 +12,7 @@ const { adminCheckToken } = require('../middlewares/checkToken');
 
 /**
  * @swagger
- * /admin/login:
+ * https://info-shop.onrender.com/api/v1/shop/admin/login:
  *   post:
  *     summary: Admin Login.
  *     description: Admin route for authontication, pass in email and password.
@@ -20,7 +20,7 @@ const { adminCheckToken } = require('../middlewares/checkToken');
 router.route('/login').post(adminLogIn);
 /**
  * @swagger
- * /admin/users:
+ * https://info-shop.onrender.com/api/v1/shop/admin/users:
  *   get:
  *     summary: list of users.
  *     description: This route returnes a list of user that are stored in database.
@@ -36,7 +36,7 @@ router.route('/users').get(adminCheckToken, getAllUsers);
 router.route('/products').get(getAllProducts);
 /**
  * @swagger
- * /admin/createProduct:
+ * https://info-shop.onrender.com/api/v1/shop/admin/createProduct:
  *   post:
  *     summary: create products.
  *     description: This route returnes a created product,data needed are [productName, category, price, quantity, image, description].
@@ -44,7 +44,7 @@ router.route('/products').get(getAllProducts);
 router.route('/createProduct').post(adminCheckToken, createProduct);
 /**
  * @swagger
- * /admin/updateProduct/:id:
+ * https://info-shop.onrender.com/api/v1/shop/admin/updateProduct/:id:
  *   patch:
  *     summary: Updating a product.
  *     description: This route for updating a product, You need to pass into the route an id of the product that you want to update it.
@@ -52,7 +52,7 @@ router.route('/createProduct').post(adminCheckToken, createProduct);
 router.route('/updateProduct/:id').patch(adminCheckToken, updateProduct);
 /**
  * @swagger
- * /admin/deleteProduct/:id:
+ * https://info-shop.onrender.com/api/v1/shop/admin/deleteProduct/:id:
  *   delete:
  *     summary: delete product.
  *     description: This route for deleting a product, You need to pass into the route an id of the product that you want to delete it.
