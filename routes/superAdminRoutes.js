@@ -31,7 +31,7 @@ const {
  *     summary: superAdmin Login.
  *     description: superAdmin route for authontication, pass in email and password.
  */
-router.route('/login').post(superAdminLogin);
+router.route('/login').post(superAdminCheckToken, superAdminLogin);
 /**
  * @swagger
  * /superAdmin/login:
