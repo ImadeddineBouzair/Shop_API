@@ -10,7 +10,7 @@ const adminSchema = new mongoose.Schema(
       type: Number,
     },
 
-    birthday: {
+    birthYear: {
       type: String,
     },
 

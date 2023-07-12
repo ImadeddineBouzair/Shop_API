@@ -33,7 +33,7 @@ const Admin = require('../model/adminSchema');
 exports.getAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
-    if (!admins) return res.status(400).send('No data found!!');
+    if (admins.length === 0) return res.status(400).send('No data found!!');
 
     const sort = req.query;
     if (sort) {
@@ -58,9 +58,9 @@ exports.getAllAdmins = async (req, res) => {
 
 exports.createAdmin = async (req, res) => {
   try {
-    const { adminName, phoneNumber, birthday, email, password } = req.body;
+    const { adminName, phoneNumber, birthYear, email, password } = req.body;
 
-    if (!(adminName && phoneNumber && birthday && email && password)) {
+    if (!(adminName && phoneNumber && birthYear && email && password)) {
       res.status(400).send('All the fields ar required!!');
     }
 

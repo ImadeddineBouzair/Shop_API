@@ -41,8 +41,6 @@ exports.deleteOrder = async (req, res) => {
   try {
     const order = await Order.findOne({ _id: req.params.id });
 
-    console.log(order);
-
     if (!order) return res.status(400).send('Order not found');
 
     await Order.findOneAndDelete({ _id: req.params.id });

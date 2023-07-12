@@ -9,7 +9,7 @@ exports.getAllSuperAdmins = async (req, res) => {
       return res.status(400).send('Not allowed');
 
     const superAdmins = await SuperAdmin.find();
-    if (!superAdmins) return res.status(400).send('No data found');
+    if (superAdmins.length === 0) return res.status(400).send('No data found');
 
     res.status(200).json({
       status: 'success',

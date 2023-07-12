@@ -4,7 +4,7 @@ const User = require('../model/userSchema');
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    if (!users) return res.status(400).send('No data!!');
+    if (users.length === 0) return res.status(400).send('No data!!');
 
     const sort = req.query;
     if (sort) {
