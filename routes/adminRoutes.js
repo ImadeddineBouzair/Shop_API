@@ -23,7 +23,7 @@ router.route('/login').post(adminLogIn);
  * https://info-shop.onrender.com/api/v1/shop/admin/users:
  *   get:
  *     summary: list of users.
- *     description: This route returnes a list of user that are stored in database.
+ *     description: This route returnes a list of user that are stored in database. And u can use only 'one' query to sort , for example in the route (/?email=1) you can sort by name or other properties
  */
 router.route('/users').get(adminCheckToken, getAllUsers);
 /**

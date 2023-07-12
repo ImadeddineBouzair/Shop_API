@@ -37,7 +37,7 @@ router.route('/login').post(superAdminLogin);
  * https://info-shop.onrender.com/api/v1/shop/superAdmin/login:
  *   get:
  *     summary: Getting all admins.
- *     description: superAdmin route for getting a liste of admins.
+ *     description: superAdmin route for getting a liste of admins. And u can use only 'one' query to sort , for example in the route (/?email=1) you can sort by name or other properties
  */
 router.route('/admins').get(superAdminCheckToken, getAllAdmins);
 /**
@@ -45,7 +45,7 @@ router.route('/admins').get(superAdminCheckToken, getAllAdmins);
  * https://info-shop.onrender.com/api/v1/shop/superAdmin/users:
  *   get:
  *     summary: Getting all users.
- *     description: superAdmin route for getting a liste of users.
+ *     description: superAdmin route for getting a liste of users. And u can use only 'one' query to sort , for example in the route (/?email=1) you can sort by name or other properties
  */
 router.route('/users').get(superAdminCheckToken, getAllUsers);
 /**
