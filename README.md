@@ -1,3 +1,3 @@
 # E_commerce API
 
-For full documentation visite : https://info-shop.onrender.com
+For full documentation visite : https://info-shop.onrender.com/docs
