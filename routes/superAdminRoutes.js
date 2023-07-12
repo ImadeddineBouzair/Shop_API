@@ -31,7 +31,7 @@ const {
  *     summary: superAdmin Login.
  *     description: superAdmin route for authontication, pass in email and password.
  */
-router.route('/login').post(superAdminCheckToken, superAdminLogin);
+router.route('/login').post(superAdminLogin);
 /**
  * @swagger
  * /superAdmin/login:
@@ -89,7 +89,9 @@ router
  *     summary: Creating superAdmins profile.
  *     description: superAdmin route for creating superAdmins profile, create in ur .env (PRIVATE_PASSWORD = ...) and pass into that route this password (only the main superAdmin need to know this password, means only the main super admin can creat another superAdmin) .
  */
-router.route('/createSuperAdmin/:password').post(createSuperAdmin);
+router
+  .route('/createSuperAdmin/:password')
+  .post(superAdminCheckToken, createSuperAdmin);
 /**
  * @swagger
  * /superAdmin/updateAdmin/:id:
