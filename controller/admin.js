@@ -72,7 +72,7 @@ exports.createAdmin = async (req, res) => {
     const admin = new Admin({
       adminName,
       phoneNumber,
-      birthday,
+      birthDay,
       email,
       password: hashedPassword,
     });
