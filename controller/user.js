@@ -114,8 +114,6 @@ exports.deleteUserProfile = async (req, res) => {
 
     await User.findOneAndDelete({ _id: req.params.id });
     res.status(200).send('Deleted with success!!');
-
-    res.status();
   } catch (err) {
     res.status(500).json({
       status: 'Fail',

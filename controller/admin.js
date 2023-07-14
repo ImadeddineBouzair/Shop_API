@@ -58,9 +58,9 @@ exports.getAllAdmins = async (req, res) => {
 
 exports.createAdmin = async (req, res) => {
   try {
-    const { adminName, phoneNumber, birthYear, email, password } = req.body;
+    const { adminName, phoneNumber, birthDay, email, password } = req.body;
 
-    if (!(adminName && phoneNumber && birthYear && email && password)) {
+    if (!(adminName && phoneNumber && birthDay && email && password)) {
       res.status(400).send('All the fields ar required!!');
     }
 
